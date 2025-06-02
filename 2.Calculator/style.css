@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    background-color: #2c3e50;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .calculator-wrapper {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .calculator-title {
+    color: #ecf0f1;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+  
+  .calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    background-color: #34495e;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+  }
+  
+  .display {
+    grid-column: span 4;
+    height: 60px;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    font-size: 2rem;
+    text-align: right;
+    padding: 10px;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 2px solid #3498db;
+    font-weight: bold;
+  }
+  
+  /* Base button style */
+  button {
+    height: 60px;
+    font-size: 1.5rem;
+    background-color: #3498db;  /* Default blue for numbers */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  
+  button:active {
+    background-color: #2472a4;
+    transform: translateY(0);
+  }
+  
+  /* Special styling for clear button (C) */
+  button:nth-child(2) {
+    background-color: #f1c40f;
+    color: #2c3e50;
+  }
+  
+  button:nth-child(2):hover {
+    background-color: #f39c12;
+  }
+  
+  /* Special styling for operation buttons */
+  button:nth-child(3),  /* ÷ */
+  button:nth-child(4),  /* × */
+  button:nth-child(5),  /* ← */
+  button:nth-child(9),  /* − */
+  button:nth-child(13) { /* + */
+    background-color: #e74c3c;
+  }
+  
+  button:nth-child(3):hover,
+  button:nth-child(4):hover,
+  button:nth-child(5):hover,
+  button:nth-child(9):hover,
+  button:nth-child(13):hover {
+    background-color: #c0392b;
+  }
+  
+  /* Special styling for equals button */
+  button:nth-child(17) {
+    background-color: #2ecc71;
+  }
+  
+  button:nth-child(17):hover {
+    background-color: #27ae60;
+  }
+  
+  /* Override for number 3 to be blue */
+  button:nth-child(16) {
+    background-color: #3498db !important;
+  }
+  
+  button:nth-child(16):hover {
+    background-color: #2980b9 !important;
+  }
+  
+  .zero {
+    grid-column: span 2;
+  }
+  

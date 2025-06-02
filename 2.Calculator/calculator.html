@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="calculator-wrapper">
+    <h1 class="calculator-title">Basic Calculator</h1>
+    <div class="calculator">
+      <div class="display" id="display">0</div>
+
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="appendValue('÷')">÷</button>
+      <button onclick="appendValue('×')">×</button>
+      <button onclick="deleteLast()">←</button>
+
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="appendValue('-')">−</button>
+
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('+')">+</button>
+
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="calculateResult()">=</button>
+
+      <button class="zero" onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+
+    // Add keyboard event listener
+    document.addEventListener('keydown', handleKeyPress);
+
+    function handleKeyPress(event) {
+      // Prevent default behavior for calculator keys
+      if (isCalculatorKey(event.key)) {
+        event.preventDefault();
+      }
+
+      // Map keyboard keys to calculator functions
+      switch(event.key) {
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+        case '.':
+          appendValue(event.key);
+          break;
+        case '+':
+          appendValue('+');
+          break;
+        case '-':
+          appendValue('-');
+          break;
+        case '*':
+          appendValue('×');
+          break;
+        case '/':
+          appendValue('÷');
+          break;
+        case 'Enter':
+        case '=':
+          calculateResult();
+          break;
+        case 'Escape':
+          clearDisplay();
+          break;
+        case 'Backspace':
+          deleteLast();
+          break;
+      }
+    }
+
+    function isCalculatorKey(key) {
+      const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', 
+                        '+', '-', '*', '/', 'Enter', '=', 'Escape', 'Backspace'];
+      return validKeys.includes(key);
+    }
+
+    function appendValue(val) {
+      if (display.innerText === '0' && val !== '.') {
+        display.innerText = val;
+      } else {
+        // Prevent multiple decimal points
+        if (val === '.' && display.innerText.includes('.')) {
+          return;
+        }
+        display.innerText += val;
+      }
+    }
+
+    function clearDisplay() {
+      display.innerText = '0';
+    }
+
+    function deleteLast() {
+      let text = display.innerText;
+      display.innerText = text.length > 1 ? text.slice(0, -1) : '0';
+    }
+
+    function calculateResult() {
+      let expression = display.innerText.replace(/×/g, '*').replace(/÷/g, '/');
+      try {
+        // Round to 8 decimal places to avoid floating point issues
+        const result = eval(expression);
+        display.innerText = Number.isInteger(result) ? result : Number(result.toFixed(8));
+      } catch {
+        display.innerText = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
